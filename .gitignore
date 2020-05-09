@@ -1,2 +1,4 @@
 # Project exclude paths
-/06-servlet/target/
+*/target/
+/.idea
+*.iml
