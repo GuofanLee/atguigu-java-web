@@ -4,24 +4,14 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
-    <!-- 注册 Servlet -->
+    <!-- 用户 Servlet -->
     <servlet>
-        <servlet-name>RegisterServlet</servlet-name>
-        <servlet-class>com.atguigu.web.RegisterServlet</servlet-class>
+        <servlet-name>UserServlet</servlet-name>
+        <servlet-class>com.atguigu.web.UserServlet</servlet-class>
     </servlet>
     <servlet-mapping>
-        <servlet-name>RegisterServlet</servlet-name>
-        <url-pattern>/registerServlet</url-pattern>
-    </servlet-mapping>
-
-    <!-- 登录 Servlet -->
-    <servlet>
-        <servlet-name>LoginServlet</servlet-name>
-        <servlet-class>com.atguigu.web.LoginServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>LoginServlet</servlet-name>
-        <url-pattern>/loginServlet</url-pattern>
+        <servlet-name>UserServlet</servlet-name>
+        <url-pattern>/userServlet</url-pattern>
     </servlet-mapping>
 
 </web-app>

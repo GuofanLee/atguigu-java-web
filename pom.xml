@@ -13,6 +13,7 @@
         <module>01-servlet</module>
         <module>02-listener-filter</module>
         <module>03-jsp-el-jstl</module>
+        <module>04-upload-download</module>
         <module>10-book-store</module>
     </modules>
 
@@ -21,6 +22,14 @@
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <servlet.version>3.1.0</servlet.version>
+        <jsp.version>2.3.0</jsp.version>
+        <el.version>3.0.0</el.version>
+        <jstl.version>1.2</jstl.version>
+        <mysql.version>5.1.47</mysql.version>
+        <druid.version>1.1.10</druid.version>
+        <commons-dbutils.version>1.5</commons-dbutils.version>
+        <commons-fileupload.version>1.4</commons-fileupload.version>
+        <commons-beanutils.version>1.9.3</commons-beanutils.version>
     </properties>
 
     <dependencies>
@@ -34,11 +43,61 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Servlet -->
             <dependency>
                 <groupId>javax.servlet</groupId>
                 <artifactId>javax.servlet-api</artifactId>
                 <version>${servlet.version}</version>
                 <scope>provided</scope>
+            </dependency>
+            <!-- JSP -->
+            <dependency>
+                <groupId>javax.servlet.jsp</groupId>
+                <artifactId>javax.servlet.jsp-api</artifactId>
+                <version>${jsp.version}</version>
+                <scope>provided</scope>
+            </dependency>
+            <!-- EL 表达式 -->
+            <dependency>
+                <groupId>javax.el</groupId>
+                <artifactId>javax.el-api</artifactId>
+                <version>${el.version}</version>
+            </dependency>
+            <!-- JSTL 标签库 -->
+            <dependency>
+                <groupId>jstl</groupId>
+                <artifactId>jstl</artifactId>
+                <version>${jstl.version}</version>
+            </dependency>
+            <!-- MySQL 数据库驱动 -->
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
+            </dependency>
+            <!-- Druid 数据库连接池 -->
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid</artifactId>
+                <version>${druid.version}</version>
+            </dependency>
+            <!-- Apache-Commons-DbUtils -->
+            <dependency>
+                <groupId>commons-dbutils</groupId>
+                <artifactId>commons-dbutils</artifactId>
+                <version>${commons-dbutils.version}</version>
+            </dependency>
+            <!-- Apache-Commons-FileUpload -->
+            <dependency>
+                <groupId>commons-fileupload</groupId>
+                <artifactId>commons-fileupload</artifactId>
+                <version>${commons-fileupload.version}</version>
+            </dependency>
+            <!-- Apache-Commons-BeanUtils -->
+            <dependency>
+                <groupId>commons-beanutils</groupId>
+                <artifactId>commons-beanutils</artifactId>
+                <version>${commons-beanutils.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

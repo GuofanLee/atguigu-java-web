@@ -32,7 +32,7 @@ public abstract class BaseDao<T> {
     }
 
     /**
-     * 使用 Apache-DbUtils 的 QueryRunner 操作数据库
+     * 使用 Apache-Commons-DbUtils 的 QueryRunner 操作数据库
      */
     private final QueryRunner queryRunner = new QueryRunner();
 
