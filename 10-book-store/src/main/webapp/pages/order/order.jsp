@@ -16,7 +16,7 @@
 <body>
 
     <div id="header">
-        <img class="logo_img" alt="" src="../../static/img/logo.gif" >
+        <img class="logo_img" alt="" src="static/img/logo.gif" >
         <span class="wel_word">我的订单</span>
         <%-- 静态包含，登录成功之后的菜单 --%>
         <%@ include file="/pages/common/login_success_menu.jsp" %>

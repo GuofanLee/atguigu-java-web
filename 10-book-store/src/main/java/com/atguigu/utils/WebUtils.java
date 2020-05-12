@@ -24,4 +24,16 @@ public class WebUtils {
         return bean;
     }
 
+    /**
+     * 将 String 转为 int，转换失败返回默认值
+     */
+    public static int parseStringToInt(String str, int defaultValue) {
+        try {
+            return Integer.parseInt(str);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return defaultValue;
+    }
+
 }
