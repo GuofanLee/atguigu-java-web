@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>图书管理</title>
+    <title>书城首页</title>
     <%-- 静态包含，base标签、css样式、jQuery --%>
     <%@ include file="/pages/common/head.jsp" %>
 </head>
@@ -12,48 +12,72 @@
 
     <div id="header">
         <img class="logo_img" alt="" src="static/img/logo.gif" >
-        <span class="wel_word">图书管理系统</span>
-        <%-- 静态包含，manager管理模块的菜单 --%>
-        <%@ include file="/pages/common/manager_menu.jsp" %>
+        <span class="wel_word">网上书城</span>
+        <div>
+            <a href="pages/user/login.jsp">登录</a> |
+            <a href="pages/user/regist.jsp">注册</a> &nbsp;&nbsp;
+            <a href="pages/cart/cart.jsp">购物车</a>
+            <a href="pages/manager/manager.jsp">后台管理</a>
+        </div>
     </div>
 
     <div id="main">
-        <table>
-            <tr>
-                <td>名称</td>
-                <td>价格</td>
-                <td>作者</td>
-                <td>销量</td>
-                <td>库存</td>
-                <td colspan="2">操作</td>
-            </tr>
+        <div id="book">
+            <%-- 价格搜索框 --%>
+            <div class="book_cond">
+                <form action="clientServlet?action=queryByPrice" method="post">
+                    价格：<input id="min" type="text" name="min" value="${param.min}"> 元 -
+                    <input id="max" type="text" name="max" value="${param.max}"> 元
+                    <input type="submit" value="查询" />
+                </form>
+            </div>
+            <%-- 购物车信息 --%>
+            <div style="text-align: center">
+                <span>您的购物车中有3件商品</span>
+                <div>
+                    您刚刚将<span style="color: red">时间简史</span>加入到了购物车中
+                </div>
+            </div>
+            <%-- 图书 --%>
             <c:forEach items="${requestScope.page.data}" var="book">
-                <tr>
-                    <td>${book.name}</td>
-                    <td>${book.price}</td>
-                    <td>${book.author}</td>
-                    <td>${book.sales}</td>
-                    <td>${book.stock}</td>
-                    <td><a href="manager/bookServlet?action=getBookToUpdate&method=update&id=${book.id}&pageNo=${requestScope.page.pageNo}">修改</a></td>
-                    <td><a href="manager/bookServlet?action=delete&id=${book.id}&pageNo=${requestScope.page.pageNo}">删除</a></td>
-                </tr>
+                <div class="b_list">
+                    <div class="img_div">
+                        <img class="book_img" alt="" src="${book.imgPath}" />
+                    </div>
+                    <div class="book_info">
+                        <div class="book_name">
+                            <span class="sp1">书名:</span>
+                            <span class="sp2">${book.name}</span>
+                        </div>
+                        <div class="book_author">
+                            <span class="sp1">作者:</span>
+                            <span class="sp2">${book.author}</span>
+                        </div>
+                        <div class="book_price">
+                            <span class="sp1">价格:</span>
+                            <span class="sp2">￥${book.price}</span>
+                        </div>
+                        <div class="book_sales">
+                            <span class="sp1">销量:</span>
+                            <span class="sp2">${book.sales}</span>
+                        </div>
+                        <div class="book_amount">
+                            <span class="sp1">库存:</span>
+                            <span class="sp2">${book.stock}</span>
+                        </div>
+                        <div class="book_add">
+                            <button>加入购物车</button>
+                        </div>
+                    </div>
+                </div>
             </c:forEach>
-            <tr>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td><a href="pages/manager/book_edit.jsp?method=add&pageNo=${requestScope.page.pageCount}">添加图书</a></td>
-            </tr>
-        </table>
+        </div>
 
         <div id="page_nav">
             <%-- 首页、上一页 --%>
             <c:if test="${requestScope.page.pageNo != 1}">
-                <a href="manager/bookServlet?action=pageList&pageNo=1">首页</a>
-                <a href="manager/bookServlet?action=pageList&pageNo=${requestScope.page.pageNo - 1}">上一页</a>
+                <a href="clientServlet?action=index&pageNo=1">首页</a>
+                <a href="clientServlet?action=index&pageNo=${requestScope.page.pageNo - 1}">上一页</a>
             </c:if>
             <%-- 计算页码输出范围 --%>
             <c:choose>
@@ -89,13 +113,13 @@
                     【${i}】
                 </c:if>
                 <c:if test="${requestScope.page.pageNo != i}">
-                    <a href="manager/bookServlet?action=pageList&pageNo=${i}">${i}</a>
+                    <a href="clientServlet?action=index&pageNo=${i}">${i}</a>
                 </c:if>
             </c:forEach>
             <%-- 下一页、末页 --%>
             <c:if test="${requestScope.page.pageNo != requestScope.page.pageCount}">
-                <a href="manager/bookServlet?action=pageList&pageNo=${requestScope.page.pageNo + 1}">下一页</a>
-                <a href="manager/bookServlet?action=pageList&pageNo=${requestScope.page.pageCount}">末页</a>
+                <a href="clientServlet?action=index&pageNo=${requestScope.page.pageNo + 1}">下一页</a>
+                <a href="clientServlet?action=index&pageNo=${requestScope.page.pageCount}">末页</a>
             </c:if>
             <%-- 总页数，总记录数 --%>
             &nbsp;
@@ -108,7 +132,7 @@
                     //跳到指定页码
                     $("#searchPageBtn").click(function () {
                         const pageNo = $("#pn_input").val();
-                        location.href = "${pageScope.basePath}manager/bookServlet?action=pageList&pageNo=" + pageNo;
+                        location.href = "${pageScope.basePath}clientServlet?action=index&pageNo=" + pageNo;
                     });
                 })
             </script>

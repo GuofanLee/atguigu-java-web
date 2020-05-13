@@ -18,8 +18,14 @@ public interface BookDao {
 
     int updateBook(Book book);
 
-    Book queryBookById(Integer id);
+    Book getBookById(Integer id);
 
-    List<Book> queryBooks();
+    int getCount();
+
+    List<Book> pageQuery(int begin, int pageSize);
+
+    int getCountByPrice(int minPrice, int maxPrice);
+
+    List<Book> pageQueryByPrice(int minPrice, int maxPrice, int begin, int pageSize);
 
 }

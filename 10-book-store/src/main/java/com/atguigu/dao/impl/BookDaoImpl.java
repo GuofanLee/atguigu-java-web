@@ -32,15 +32,36 @@ public class BookDaoImpl extends BaseDao<Book> implements BookDao {
     }
 
     @Override
-    public Book queryBookById(Integer id) {
+    public Book getBookById(Integer id) {
         String sql = "select id, name, author, price, sales, stock, img_path imgPath from t_book where id = ?";
         return queryForOne(sql, id);
     }
 
     @Override
-    public List<Book> queryBooks() {
-        String sql = "select id, name, author, price, sales, stock, img_path imgPath from t_book";
-        return queryForList(sql);
+    public int getCount() {
+        String sql = "select count(*) from t_book";
+        Number count = queryForValue(sql);
+        return count.intValue();
+    }
+
+    @Override
+    public List<Book> pageQuery(int begin, int pageSize) {
+        String sql = "select id, name, author, price, sales, stock, img_path imgPath from t_book limit ?, ?";
+        return queryForList(sql, begin, pageSize);
+    }
+
+    @Override
+    public int getCountByPrice(int minPrice, int maxPrice) {
+        String sql = "select count(*) from t_book where price between ? and ?";
+        Number count = queryForValue(sql, minPrice, maxPrice);
+        return count.intValue();
+    }
+
+    @Override
+    public List<Book> pageQueryByPrice(int minPrice, int maxPrice, int begin, int pageSize) {
+        String sql = "select id, name, author, price, sales, stock, img_path imgPath from t_book " +
+                     "where price between ? and ? order by price asc limit ?, ?";
+        return queryForList(sql, minPrice, maxPrice, begin, pageSize);
     }
 
 }

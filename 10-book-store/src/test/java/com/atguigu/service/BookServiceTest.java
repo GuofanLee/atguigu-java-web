@@ -1,11 +1,11 @@
 package com.atguigu.service;
 
 import com.atguigu.pojo.Book;
+import com.atguigu.pojo.Page;
 import com.atguigu.service.impl.BookServiceImpl;
 import org.junit.Test;
 
 import java.math.BigDecimal;
-import java.util.List;
 
 /**
  * 请填写类的描述
@@ -33,15 +33,21 @@ public class BookServiceTest {
     }
 
     @Test
-    public void queryBookById() {
-        Book book = bookService.queryBookById(26);
+    public void getBookById() {
+        Book book = bookService.getBookById(26);
         System.out.println(book);
     }
 
     @Test
-    public void queryBooks() {
-        List<Book> books = bookService.queryBooks();
-        books.forEach(System.out::println);
+    public void pageQuery() {
+        Page<Book> bookPage = bookService.pageQuery(1, Page.PAGE_SIZE);
+        System.out.println(bookPage);
+    }
+
+    @Test
+    public void pageQueryByPrice() {
+        Page<Book> bookPage = bookService.pageQueryByPrice(10, 50, 1, Page.PAGE_SIZE);
+        System.out.println(bookPage);
     }
 
 }

@@ -30,8 +30,7 @@ public class WebUtils {
     public static int parseStringToInt(String str, int defaultValue) {
         try {
             return Integer.parseInt(str);
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (Exception ignored) {
         }
         return defaultValue;
     }

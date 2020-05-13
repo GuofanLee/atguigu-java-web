@@ -1,6 +1,7 @@
 package com.atguigu.pojo;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 public class Book {
     private Integer id;
@@ -98,6 +99,25 @@ public class Book {
                 ", stock=" + stock +
                 ", imgPath='" + imgPath + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Book book = (Book) o;
+        return Objects.equals(id, book.id) &&
+                Objects.equals(name, book.name) &&
+                Objects.equals(author, book.author) &&
+                Objects.equals(price, book.price) &&
+                Objects.equals(sales, book.sales) &&
+                Objects.equals(stock, book.stock) &&
+                Objects.equals(imgPath, book.imgPath);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, author, price, sales, stock, imgPath);
     }
 
 }

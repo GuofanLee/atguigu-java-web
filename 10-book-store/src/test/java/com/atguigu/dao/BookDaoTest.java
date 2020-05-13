@@ -33,15 +33,32 @@ public class BookDaoTest {
     }
 
     @Test
-    public void queryBookById() {
-        Book book = bookDao.queryBookById(22);
+    public void getBookById() {
+        Book book = bookDao.getBookById(22);
         System.out.println(book);
     }
 
     @Test
-    public void queryBooks() {
-        List<Book> books = bookDao.queryBooks();
+    public void getCount() {
+        int count = bookDao.getCount();
+        System.out.println(count);
+    }
+
+    @Test
+    public void pageQuery() {
+        List<Book> books = bookDao.pageQuery(0, 4);
         books.forEach(System.out::println);
     }
 
+    @Test
+    public void getCountByPrice() {
+        int count = bookDao.getCountByPrice(10, 50);
+        System.out.println(count);
+    }
+
+    @Test
+    public void pageQueryByPrice() {
+        List<Book> books = bookDao.pageQueryByPrice(10, 50, 0, 4);
+        books.forEach(System.out::println);
+    }
 }

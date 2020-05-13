@@ -1,8 +1,7 @@
 package com.atguigu.service;
 
 import com.atguigu.pojo.Book;
-
-import java.util.List;
+import com.atguigu.pojo.Page;
 
 /**
  * 请填写类的描述
@@ -18,8 +17,10 @@ public interface BookService {
 
     void updateBook(Book book);
 
-    Book queryBookById(Integer id);
+    Book getBookById(Integer id);
 
-    List<Book> queryBooks();
+    Page<Book> pageQuery(int pageNo, int pageSize);
+
+    Page<Book> pageQueryByPrice(int minPrice, int maxPrice, int pageNo, int pageSize);
 
 }
