@@ -31,6 +31,7 @@
         <commons-dbutils.version>1.5</commons-dbutils.version>
         <commons-fileupload.version>1.4</commons-fileupload.version>
         <commons-beanutils.version>1.9.3</commons-beanutils.version>
+        <kaptcha.version>2.3.2</kaptcha.version>
     </properties>
 
     <dependencies>
@@ -99,6 +100,12 @@
                 <groupId>commons-beanutils</groupId>
                 <artifactId>commons-beanutils</artifactId>
                 <version>${commons-beanutils.version}</version>
+            </dependency>
+            <!-- Kaptcha 验证码 -->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${kaptcha.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

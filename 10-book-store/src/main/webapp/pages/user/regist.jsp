@@ -9,6 +9,12 @@
     <script type="text/javascript">
         // 页面加载完成之后
         $(function () {
+            // 验证码图片点击事件
+            $("#code_img").click(function () {
+                <%--this.src = "${basePath}kaptcha.jpg";--%>
+                this.src = "kaptcha.jpg?a=" + new Date().getTime();
+            });
+
             // 给注册绑定单击事件
             $("#sub_btn").click(function () {
                 // 验证用户名：必须由字母，数字下划线组成，并且长度为5到12位
@@ -134,7 +140,7 @@
                             <br />
                             <label>验证码：</label>
                             <input class="itxt" type="text" name="code" style="width: 150px;" id="code"/>
-                            <img alt="" src="static/img/code.bmp" style="float: right; margin-right: 40px">
+                            <img id="code_img" alt="" src="kaptcha.jpg" style="float: right; margin-right: 40px; width: 90px; height: 40px">
                             <br />
                             <br />
                             <input type="submit" value="注册" id="sub_btn" />
