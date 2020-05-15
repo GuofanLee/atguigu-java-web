@@ -38,6 +38,7 @@ public abstract class BaseDao<T> {
 
     /**
      * 执行增、删、改操作
+     * 不关闭连接，异常捕获后转为 RuntimeException 再抛出，以防可能会使用事务
      *
      * @return 返回 -1 说明执行失败，返回其它表示影响的行数
      */
@@ -47,14 +48,13 @@ public abstract class BaseDao<T> {
             return queryRunner.update(connection, sql, params);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-        return -1;
     }
 
     /**
-     * 查询一条纪律
+     * 查询一条记录
+     * 不关闭连接，异常捕获后转为 RuntimeException 再抛出，以防可能会使用事务
      *
      * @return 返回查询的数据，返回 null 说明执行失败
      */
@@ -64,14 +64,13 @@ public abstract class BaseDao<T> {
             return queryRunner.query(connection, sql, new BeanHandler<>(clazz), params);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /**
      * 查询多条记录
+     * 不关闭连接，异常捕获后转为 RuntimeException 再抛出，以防可能会使用事务
      *
      * @return 返回查询的数据，返回 null 说明执行失败
      */
@@ -81,14 +80,13 @@ public abstract class BaseDao<T> {
             return queryRunner.query(connection, sql, new BeanListHandler<>(clazz), params);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
     /**
      * 查询单值数据
+     * 不关闭连接，异常捕获后转为 RuntimeException 再抛出，以防可能会使用事务
      *
      * @return 返回查询的数据，返回 null 说明执行失败
      */
@@ -98,10 +96,8 @@ public abstract class BaseDao<T> {
             return queryRunner.query(connection, sql, new ScalarHandler<>(), params);
         } catch (Exception e) {
             e.printStackTrace();
-        } finally {
-            JdbcUtils.close(connection);
+            throw new RuntimeException(e);
         }
-        return null;
     }
 
 }

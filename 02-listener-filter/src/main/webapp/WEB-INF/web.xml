@@ -4,8 +4,53 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
          version="3.1">
 
+    <!-- Listener 监听器 -->
     <listener>
         <listener-class>com.atguigu.listener.MyServletContextListener</listener-class>
     </listener>
+
+    <!-- Filter 登录拦截 -->
+    <filter>
+        <filter-name>AdminFilter</filter-name>
+        <filter-class>com.atguigu.filter.AdminFilter</filter-class>
+        <init-param>
+            <param-name>username</param-name>
+            <param-value>root</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>AdminFilter</filter-name>
+        <url-pattern>/admin/*</url-pattern>
+    </filter-mapping>
+
+    <!-- 登录 Servlet -->
+    <servlet>
+        <servlet-name>LoginServlet</servlet-name>
+        <servlet-class>com.atguigu.servlet.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>LoginServlet</servlet-name>
+        <url-pattern>/loginServlet</url-pattern>
+    </servlet-mapping>
+
+    <!-- 模拟多个Filter 的 Filter1 -->
+    <filter>
+        <filter-name>Filter1</filter-name>
+        <filter-class>com.atguigu.filter.Filter1</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter1</filter-name>
+        <url-pattern>/target.jsp</url-pattern>
+    </filter-mapping>
+
+    <!-- 模拟多个Filter 的 Filter2 -->
+    <filter>
+        <filter-name>Filter2</filter-name>
+        <filter-class>com.atguigu.filter.Filter2</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>Filter2</filter-name>
+        <url-pattern>/target.jsp</url-pattern>
+    </filter-mapping>
 
 </web-app>

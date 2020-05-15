@@ -2,8 +2,6 @@ package com.atguigu.utils;
 
 import org.junit.Test;
 
-import java.sql.Connection;
-
 /**
  * 请填写类的描述
  *
@@ -14,11 +12,11 @@ public class JdbcUtilsTest {
 
     @Test
     public void testGetConnection() {
-        for (int i = 0; i < 100; i++) {
+        /*for (int i = 0; i < 100; i++) {
             Connection connection = JdbcUtils.getConnection();
             System.out.println(connection);
-            JdbcUtils.close(connection);
-        }
+            JdbcUtils.close();
+        }*/
     }
 
 }
