@@ -6,9 +6,12 @@ import com.atguigu.pojo.CartItem;
 import com.atguigu.service.BookService;
 import com.atguigu.service.impl.BookServiceImpl;
 import com.atguigu.utils.WebUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 请填写类的描述
@@ -33,10 +36,15 @@ public class CartServlet extends BaseServlet {
                 cart = new Cart();
                 request.getSession().setAttribute("cart", cart);
             }
-            request.getSession().setAttribute("lastName", cartItem.getName());
             cart.addItem(cartItem);
+            Map<String, Object> resultMap = new HashMap<>();
+            resultMap.put("totalCount", cart.getTotalCount());
+            request.getSession().setAttribute("lastName", cartItem.getName());
+            resultMap.put("lastName", cartItem.getName());
+            String resultJson = new Gson().toJson(resultMap);
+            response.setContentType("text/html;charset=UTF-8");
+            response.getWriter().write(resultJson);
         }
-        response.sendRedirect(request.getHeader("Referer"));
     }
 
     /**

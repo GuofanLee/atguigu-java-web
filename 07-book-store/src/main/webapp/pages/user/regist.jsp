@@ -9,6 +9,22 @@
     <script type="text/javascript">
         // 页面加载完成之后
         $(function () {
+            //给用户名输入框绑定失去焦点事件
+            $("#username").blur(function () {
+                let username = this.value;
+                $.getJSON(
+                    "userServlet",
+                    "action=checkUsername&username=" + username,
+                    function (responseData) {
+                        if (responseData.existUsername) {
+                            $("span.errorMsg").text("用户名已存在");
+                        } else {
+                            $("span.errorMsg").text("用户名可用");
+                        }
+                    }
+                );
+            });
+
             // 验证码图片点击事件
             $("#code_img").click(function () {
                 <%--this.src = "${basePath}kaptcha.jpg";--%>

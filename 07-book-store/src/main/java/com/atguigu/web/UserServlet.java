@@ -4,9 +4,12 @@ import com.atguigu.pojo.User;
 import com.atguigu.service.UserService;
 import com.atguigu.service.impl.UserServiceImpl;
 import com.atguigu.utils.WebUtils;
+import com.google.gson.Gson;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.google.code.kaptcha.Constants.KAPTCHA_SESSION_KEY;
 
@@ -40,6 +43,19 @@ public class UserServlet extends BaseServlet {
             request.setAttribute("username", username);
             request.getRequestDispatcher("/pages/user/login.jsp").forward(request, response);
         }
+    }
+
+    /**
+     * 检查用户名是否已被注册
+     */
+    public void checkUsername(HttpServletRequest request, HttpServletResponse response) throws Exception {
+        Gson gson = new Gson();
+        String username = request.getParameter("username");
+        boolean existUsername = userService.existUsername(username);
+        Map<String, Object> resultMap = new HashMap<>();
+        resultMap.put("existUsername", existUsername);
+        String resultJson = gson.toJson(resultMap);
+        response.getWriter().write(resultJson);
     }
 
     /**
