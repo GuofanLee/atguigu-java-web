@@ -63,7 +63,7 @@ public class JdbcUtils {
         if (connection != null) {
             try {
                 connection.commit();
-                //不需要恢复自动提交了，所有数据库操作都使用手动提交
+                //不需要手动恢复自动提交，释放连接后，会自动恢复自动提交
                 //connection.setAutoCommit(true);
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -87,7 +87,7 @@ public class JdbcUtils {
         if (connection != null) {
             try {
                 connection.rollback();
-                //不需要恢复自动提交了，所有数据库操作都使用手动提交
+                //不需要手动恢复自动提交，释放连接后，会自动恢复自动提交
                 //connection.setAutoCommit(true);
             } catch (Exception e) {
                 e.printStackTrace();
