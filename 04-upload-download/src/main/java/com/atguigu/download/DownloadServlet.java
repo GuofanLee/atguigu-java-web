@@ -34,11 +34,7 @@ public class DownloadServlet extends HttpServlet {
         String mimeType = servletContext.getMimeType("/file/" + downloadFileName);
         //将文件的 MIME 类型设置到 Http 响应头的 Content-Type 参数中
         response.setContentType(mimeType);
-        //4、回传前，通过响应头，告诉客户端返回的数据是用于下载使用
-        //响应头参数 Content-Disposition 表示告诉客户端收到的数据怎么处理
-        //attachment表示以附件的方式处理，即返回的数据是文件，需要下载
-        //filename表示下载后的文件名
-        //解决不同浏览器文件名乱码问题
+        //4、解决不同浏览器文件名乱码问题
         String fileName;
         if (request.getHeader("User-Agent").contains("Firefox")) {
             //火狐浏览器使用 BASE64 编码
@@ -47,6 +43,12 @@ public class DownloadServlet extends HttpServlet {
             //其它浏览器（谷歌、IE）使用 URL 编码
             fileName = URLEncoder.encode("美女.jpg", "UTF-8");
         }
+        /*
+         * 5、回传前，通过响应头，告诉客户端返回的数据是用于下载使用
+         * 响应头参数 Content-Disposition 表示告诉客户端收到的数据怎么处理
+         * attachment表示以附件的方式处理，即返回的数据是文件，需要下载
+         * filename表示下载后的文件名
+         */
         response.setHeader("Content-Disposition", "attachment;filename=" + fileName);
         //获取响应输出流
         ServletOutputStream outputStream = response.getOutputStream();
